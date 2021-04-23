@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # check to see is git command line installed in this machine
 IS_GIT_AVAILABLE="$(git --version)"
 if [[ $IS_GIT_AVAILABLE == *"version"* ]]; then
@@ -27,5 +26,5 @@ fi
 
 # push to Github
 git add -u;
-git commit -m "New backup `date +'%Y-%m-%d %H:%M:%S'`";
+git commit -m "New backup `date +'%Y-%m-%d'`";
 git push origin main
