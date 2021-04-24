@@ -14,7 +14,6 @@ cp  $HOME/{.zshrc,.vimrc,.tmux.conf,.robomongorc.js} .
 cp  $HOME/.gitconfig .
 cp  $HOME/.config/nvim/init.vim ./.config/nvim/
 
-
 # Check git status
 gs="$(git status | grep -i "modified")"
 # echo "${gs}"
@@ -27,4 +26,4 @@ fi
 # push to Github
 git add -u;
 git commit -m "New backup `date +'%Y-%m-%d'`";
-git push origin main
+git push
