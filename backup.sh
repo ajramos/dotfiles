@@ -26,4 +26,4 @@ fi
 # push to Github
 git add -u;
 git commit -m "New backup `date +'%Y-%m-%d'`";
-git push
+git push;
