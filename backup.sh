@@ -10,6 +10,6 @@ cp -v $HOME/.config/kitty/kitty.conf ./.config/kitty/
 cp -vr $HOME/.local/share/fonts ./.local/share/fonts
 
 # push to Github
-git add -u;
+git add -u .;
 git commit -m "New backup `date +'%Y-%m-%d %H:%M'`";
 git push origin main;
