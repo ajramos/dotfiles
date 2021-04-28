@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'ayu-theme/ayu-vim'
+Plug 'joshdick/onedark.vim'
 Plug 'fatih/vim-go'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -14,6 +15,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
+Plug 'preservim/tagbar'
 
 call plug#end()
 
@@ -86,7 +88,7 @@ endif
 set background=dark
 colorscheme PaperColor
 
-" set termguicolors
+set termguicolors
 " let ayucolor="mirage"
 " colorscheme ayu
 " colorscheme palenight 
@@ -142,7 +144,8 @@ let g:go_addtags_transform = "camelcase"
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#ale#enabled=1
 let g:airline#extensions#fugitiveline#enabled=1
-let g:airline_theme='night_owl'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='PaperColor'
 
 " PLUGIN: NERDTree
 nnoremap <leader>n :NERDTreeFocus<CR>
@@ -151,5 +154,5 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 " PLUGIN: vim-devicons
-set guifont=DroidSansMono\ Nerd\ Font\ 11
+set guifont=RobotoMono\ Nerd\ Font\ 11
 let g:airline_powerline_fonts = 1
