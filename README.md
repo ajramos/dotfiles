@@ -6,9 +6,17 @@ learning path in linux.
 Thank you very much to the community who made all this learnings possible.
 
 So far, it includes de configuration files for:
-- NeoVim 
+- Bspwm
+- Dunst
 - Git
-- tmux
-- zsh (Oh-my-zsh)
-- vim
+- NeoVim
+- PCManFM
+- Picom
+- Polibar
 - Robo 3T (AKA Robomongo)
+- Rofi
+- Sxhkd
+- Starship
+- Tmux
+- vim
+- zsh (Oh-my-zsh)

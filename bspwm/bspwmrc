@@ -1,0 +1,87 @@
+#! /bin/sh
+
+# Initialize clipboard
+clipmenud &
+
+# Initialize Look and feel
+feh --bg-fill /home/ajramos/Pictures/city.jpg &
+picom &
+
+# Initialize other utilities
+kitty &
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+bspc config pointer_modifier mod1
+
+PRIMARY_MONITOR=$(xrandr | grep " connected " | grep eDP |cut -f 1 -d ' ')
+SECONDARY_MONITOR=$(xrandr | grep " connected " | grep HDMI |cut -f 1 -d ' ')
+
+HAS_SECONDARY=$(xrandr | grep $SECONDARY_MONITOR | cut -f 2 -d ' ')
+
+DESKTOPS_SET_1="term browser code sns images"
+DESKTOPS_SET_2="term1 browser1 code1 misc0 misc1"
+
+if [ "$HAS_SECONDARY" != "connected" ]; then
+  bspc monitor $PRIMARY_MONITOR -d $DESKTOPS_SET_1 $DESKTOPS_SET_2
+else
+  bspc monitor $PRIMARY_MONITOR -d $DESKTOPS_SET_1 
+  bspc monitor $SECONDARY_MONITOR -d $DESKTOPS_SET_2
+fi
+
+#Initialize polybar after arranging icons
+$HOME/.config/polybar/launch.sh 
+
+bspc config border_width         2
+bspc config window_gap           8
+
+# Colors
+source $HOME/.config/bspwm/colors.cfg
+bspc config focused_border_color            "$primary"
+bspc config active_border_color             "$green"
+bspc config normal_border_color             "$background"
+bspc config urgent_border_color             "$foreground"
+
+SPACES=$(bspc query -D)
+for SPACE in $SPACES
+do
+	bspc config -d ${SPACE} window_gap 8
+	bspc config -d ${SPACE} top_padding 10
+	bspc config -d ${SPACE} bottom_padding 10
+	bspc config -d ${SPACE} left_padding 10
+	bspc config -d ${SPACE} right_padding 10
+done
+
+bspc config automatic_scheme		 	spiral
+bspc config split_ratio          	0.52
+bspc config borderless_monocle   	true
+bspc config gapless_monocle      	false
+bspc config single_monocle       	true
+bspc config focus_follows_pointer true
+
+
+bspc desktop ^1 -1 monocle
+bspc desktop ^2 -1 monocle
+bspc desktop ^5 -1 monocle
+bspc desktop ^6 -1 monocle
+bspc desktop ^9 -1 monocle
+bspc desktop ^10 -1 monocle
+
+bspc rule -a firefox desktop='browser'
+bspc rule -a code-oss desktop='code'
+bspc rule -a robo3t desktop='code'
+bspc rule -a TelegramDesktop desktop='sns'
+bspc rule -a Cawbird desktop='sns'
+bspc rule -a Slack desktop='sns'
+bspc rule -a Gimp-2.10 desktop='images' state=floating follow=on
+#bspc rule -a mplayer2 state=floating
+#bspc rule -a Kupfer.py focus=on
+#bspc rule -a Screenkey manage=off
+
+# set Desktop 7 to start with floating windows
+FLOATING_DEKSTOP_ID=$(bspc query -D -d '^7')
+bspc subscribe node_manage | while read -a msg ; do
+	desk_id=${msg[2]}
+	wid=${msg[3]}
+	[ "$FLOATING_DEKSTOP_ID" = "$desk_id" ] && bspc node "$wid" -t floating
+done
